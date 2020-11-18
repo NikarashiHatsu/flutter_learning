@@ -1,15 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:training/pages/chatroom.dart';
-import 'package:training/components/status.dart';
 import 'package:training/pages/contacts.dart';
+import 'package:training/pages/loading.dart';
+
+import 'package:training/firestore/add_user.dart';
 
 void main() {
-  runApp(
-    MaterialApp(
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(FirestoreApp());
+}
+
+class FirestoreApp extends StatelessWidget {
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: _initialization,
+      builder: (context, snapshot) {
+        // Check for errors
+        if(snapshot.hasError) {
+          // return SomethingWentWrong();
+        }
+
+        // Once complete, show the app
+        if(snapshot.connectionState == ConnectionState.done) {
+          return TheTrueApp();
+        }
+
+        // Otherwise, show loading page
+        return Loading();
+      },
+    );
+  }
+}
+
+class TheTrueApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: ChattingApp(),
-    ),
-  );
+    );
+  }
 }
 
 class ChattingApp extends StatelessWidget {
@@ -45,14 +79,18 @@ class ChattingApp extends StatelessWidget {
             // Status(),
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.chat),
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(
-              builder: (context) => Contacts(), 
-            ));
-          },
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   child: Icon(Icons.chat),
+        //   onPressed: () {
+        //     Navigator.push(context, MaterialPageRoute(
+        //       builder: (context) => Contacts(), 
+        //     ));
+        //   },
+        // ),
+        // floatingActionButton: AddUser(
+        //   username: 'HatsuShiroyuki',
+        //   password: 'Shiroyuki',
+        // ),
       ),
     );
   }

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "582504275059",
+    "firebase_url": "https://chatter-2cf11.firebaseio.com",
+    "project_id": "chatter-2cf11",
+    "storage_bucket": "chatter-2cf11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582504275059:android:27f6a6fb4f65bb1e349e06",
+        "android_client_info": {
+          "package_name": "com.example.training"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "582504275059-7c4j187ti78a2c18dnj032bgn8dfbing.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAC4jedvHDgV6705mRjTxqerCiu6X5tECc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582504275059-7c4j187ti78a2c18dnj032bgn8dfbing.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
