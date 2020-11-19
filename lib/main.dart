@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:training/pages/chatroom.dart';
-import 'package:training/pages/contacts.dart';
+import 'package:training/pages/LoginPage.dart';
+// import 'package:training/pages/chatroom.dart';
+// import 'package:training/pages/contacts.dart';
 import 'package:training/pages/loading.dart';
 
-import 'package:training/firestore/add_user.dart';
+// import 'package:training/firestore/add_user.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(FirestoreApp());
 }
 
-class FirestoreApp extends StatelessWidget {
+class FirestoreApp extends StatefulWidget {
+  @override
+  _FirestoreAppState createState() => _FirestoreAppState();
+}
+
+class _FirestoreAppState extends State<FirestoreApp> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   
   @override
@@ -26,72 +32,77 @@ class FirestoreApp extends StatelessWidget {
 
         // Once complete, show the app
         if(snapshot.connectionState == ConnectionState.done) {
-          return TheTrueApp();
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: LoginPage()
+          );
         }
 
-        // Otherwise, show loading page
         return Loading();
       },
     );
   }
 }
 
-class TheTrueApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: ChattingApp(),
-    );
-  }
-}
+// class FirestoreApp extends StatelessWidget {
+// }
 
-class ChattingApp extends StatelessWidget {
-  final List<Tab> tabs = <Tab>[
-    Tab(text: 'CHAT'),
-    // Tab(text: 'STATUS'),
-  ];
+// class TheTrueApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: ChattingApp(),
+//     );
+//   }
+// }
 
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: tabs.length,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Chat App'),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.search, color: Colors.white),
-              onPressed: null,
-            ),
-            IconButton(
-              icon: Icon(Icons.more_vert, color: Colors.white),
-              onPressed: null,
-            ),
-          ],
-          bottom: TabBar(
-            tabs: tabs,
-          ),
-        ),
-        body: TabBarView(
-          children: [
-            ChatRoom(),
-            // Status(),
-          ],
-        ),
-        // floatingActionButton: FloatingActionButton(
-        //   child: Icon(Icons.chat),
-        //   onPressed: () {
-        //     Navigator.push(context, MaterialPageRoute(
-        //       builder: (context) => Contacts(), 
-        //     ));
-        //   },
-        // ),
-        // floatingActionButton: AddUser(
-        //   username: 'HatsuShiroyuki',
-        //   password: 'Shiroyuki',
-        // ),
-      ),
-    );
-  }
-}
+// class ChattingApp extends StatelessWidget {
+//   final List<Tab> tabs = <Tab>[
+//     Tab(text: 'CHAT'),
+//     // Tab(text: 'STATUS'),
+//   ];
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return DefaultTabController(
+//       length: tabs.length,
+//       child: Scaffold(
+//         appBar: AppBar(
+//           title: Text('Chat App'),
+//           actions: <Widget>[
+//             IconButton(
+//               icon: Icon(Icons.search, color: Colors.white),
+//               onPressed: null,
+//             ),
+//             IconButton(
+//               icon: Icon(Icons.more_vert, color: Colors.white),
+//               onPressed: null,
+//             ),
+//           ],
+//           bottom: TabBar(
+//             tabs: tabs,
+//           ),
+//         ),
+//         body: TabBarView(
+//           children: [
+//             ChatRoom(),
+//             // Status(),
+//           ],
+//         ),
+//         // floatingActionButton: FloatingActionButton(
+//         //   child: Icon(Icons.chat),
+//         //   onPressed: () {
+//         //     Navigator.push(context, MaterialPageRoute(
+//         //       builder: (context) => Contacts(), 
+//         //     ));
+//         //   },
+//         // ),
+//         // floatingActionButton: AddUser(
+//         //   username: 'HatsuShiroyuki',
+//         //   password: 'Shiroyuki',
+//         // ),
+//       ),
+//     );
+//   }
+// }
